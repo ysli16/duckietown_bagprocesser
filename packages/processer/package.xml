@@ -1,0 +1,11 @@
+<package>
+  <name>processer</name>
+  <version>0.1.0</version>
+  <description>
+  Package for RH3 exercise20
+  </description>
+  <maintainer email="yuesli@student.ethz.ch">Yueshan Li</maintainer>
+  <license>None</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

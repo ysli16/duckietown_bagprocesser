@@ -1,7 +1,7 @@
 # parameters
-ARG REPO_NAME="<REPO_NAME_HERE>"
-ARG DESCRIPTION="<DESCRIPTION_HERE>"
-ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
+ARG REPO_NAME="<duckietown_bagprocesser>"
+ARG DESCRIPTION="<extract image and timestamp from rosbag, draw timestamp on top of the image, write image to a new bag.>"
+ARG MAINTAINER="<Yueshan Li> (<yues@student.ethz.ch>)"
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
