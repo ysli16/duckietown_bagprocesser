@@ -1,47 +1,33 @@
-# Template: template-ros
+# Bag Pzrocesser
 
-This template provides a boilerplate repository
-for developing ROS-based software in Duckietown.
+## Execution
+### Build image
+Run command
 
-**NOTE:** If you want to develop software that does not use
-ROS, check out [this template](https://github.com/duckietown/template-basic).
+`dts devel build -f `
 
+### Run container with mounted volume
 
-## How to use it
+Run command
 
-### 1. Fork this repository
+`docker run -it -v <path_to_bagfile>:/data/ duckietown/duckietown_bagprocesser:v2-amd64`
 
-Use the fork button in the top-right corner of the github page to fork this template repository.
+Replace `<path_to_bagfile>` with the absolute directory to where the bagfile you want to process is stored. The new bagfile named "processed_bag.bag" will be stored at the same folder.
 
+### Play new bagfile on duckiebot
 
-### 2. Create a new repository
+#### Build communication between your PC and duckiebot using ROS
+Run command
 
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
+`docker run -it --net host -e ROS_MASTER_URI=http://<host_ip>:11311/ -e ROS_IP=<duckiebot_ip> -v <path_to_bagfile>:/home duckietown/dt-ros-commons:daffy-amd64 /bin/bash`
 
+Replace `<host_ip>` and `<duckiebot_ip>` with the IP address of your PC and your duckiebot. You can check the IP address with command `ifconfig`. The `<path_to_bagfile>` should be replaced with the same directory you used to mount and store the bagfiles.
 
-### 3. Define dependencies
+#### Play bagfile
+Move to the container directory that you mounted the volume, with command `cd /home` in this case.
 
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
+Run command
 
+`rosbag play processed_bag.bag --loop /<MY_ROBOT>/camera_node/image/compressed:=/new_image/compressed`
 
-### 4. Place your code
-
-Place your code in the directory `/packages/` of
-your new repository.
-
-
-### 5. Setup launchers
-
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
-
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
-
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+Replace <MY_ROBOT> with the name of your duckiebot.
