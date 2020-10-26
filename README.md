@@ -1,12 +1,12 @@
 # Bag Pzrocesser
 
 ## Execution
-### Build image
+### 1.Build image
 Run command
 
 `dts devel build -f `
 
-### Run container with mounted volume
+### 2.Run container with mounted volume
 
 Run command
 
@@ -14,7 +14,7 @@ Run command
 
 Replace `<path_to_bagfile>` with the absolute directory to where the bagfile you want to process is stored. The new bagfile named "processed_bag.bag" will be stored at the same folder.
 
-### Play new bagfile on duckiebot
+### 3.Play the processed bagfile on duckiebot
 
 #### Build communication between your PC and duckiebot using ROS
 Run command
